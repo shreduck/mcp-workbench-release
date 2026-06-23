@@ -1,0 +1,115 @@
+MCP Workbench Source-Available License
+Version 1.0
+
+Copyright (c) 2026 Shreduck and contributors.
+
+Contact: duck_code_contact@proton.me
+
+This software and its source code, documentation, build files, container images,
+binary artifacts, forks, branches, modifications, and derivative works are
+collectively the "Licensed Materials".
+
+1. Non-Enterprise Permission
+
+Subject to this license, the repository owner grants individuals permission to
+use, copy, modify, build, and run the Licensed Materials for personal,
+educational, research, hobby, non-commercial, and non-enterprise purposes.
+
+This permission is implied by access to the Licensed Materials, but only for the
+uses allowed by this license.
+
+2. Enterprise Use, Trial Use, and Written Permission
+
+Enterprise and commercial users may use the Licensed Materials without a
+commercial license on a limited trial basis to evaluate whether the Licensed
+Materials are useful in an enterprise environment or workflow.
+
+This trial permission does not allow production deployment, enterprise product
+or service distribution, sublicensing, resale, or making the Licensed Materials
+available to clients or customers.
+
+The repository owner trusts enterprise and commercial users to act in good
+conscience. If the Licensed Materials become a used tool within an enterprise
+environment, business process, team workflow, client engagement, customer
+offering, or other commercial or organizational work, the user must contact the
+repository owner at duck_code_contact@proton.me to request written permission.
+
+Except for the limited trial permission above, you must obtain prior written
+permission from the repository owner before using the Licensed Materials for
+Enterprise Work.
+
+"Enterprise Work" means any use by, for, or on behalf of a company, business,
+government agency, non-profit institution, employer, client, customer, or other
+organization, including but not limited to:
+
+- internal business operations;
+- employee, contractor, consultant, client, or customer work;
+- production systems;
+- revenue-generating work;
+- commercial evaluation beyond the limited trial permission described above;
+- hosted services, SaaS, managed services, or internal platforms;
+- work performed as part of paid employment or paid consulting.
+
+The repository owner may condition Enterprise Work permission on a separate
+commercial agreement and payment of a fee.
+
+3. Enterprise Product Distribution Requires Written Permission
+
+You must obtain prior written permission from the repository owner before
+distributing, sublicensing, selling, offering, embedding, bundling, hosting, or
+otherwise making available the Licensed Materials, or any branch, fork,
+modification, derivative work, container image, binary artifact, or service based
+on them, as part of an enterprise product or enterprise-facing service.
+
+This restriction applies whether the distribution is source code, compiled code,
+container images, cloud services, appliances, plugins, integrations, forks,
+branches, or any other form.
+
+The repository owner may condition such permission on a separate commercial
+agreement and payment of a fee.
+
+4. Redistribution Limits
+
+Except for sharing unmodified copies for allowed Non-Enterprise Permission uses,
+you may not redistribute the Licensed Materials, modified versions, derivative
+works, forks, branches, binary artifacts, or container images without prior
+written permission from the repository owner.
+
+5. No Trademark Rights
+
+This license does not grant rights to use the names, logos, trademarks, service
+marks, or branding of the repository owner or contributors, except as necessary
+to identify the Licensed Materials in an allowed use.
+
+6. Notices
+
+You must keep this license and copyright notice with all copies or substantial
+portions of the Licensed Materials.
+
+7. No Warranty
+
+THE LICENSED MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, SECURITY,
+AVAILABILITY, OR ERROR-FREE OPERATION. USE THE LICENSED MATERIALS AT YOUR OWN
+RISK.
+
+8. Limitation Of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+WILL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION
+WITH THE LICENSED MATERIALS OR THE USE OR OTHER DEALINGS IN THE LICENSED
+MATERIALS.
+
+9. Termination
+
+Any permission granted by this license terminates automatically if you violate
+this license. After termination, you must stop using and distributing the
+Licensed Materials and delete or destroy copies in your possession or control,
+except where retention is required by law.
+
+10. Separate Agreements
+
+If you have a separate written agreement with the repository owner, that
+agreement controls where it conflicts with this license.

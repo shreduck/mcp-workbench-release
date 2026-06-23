@@ -1,0 +1,27 @@
+# Effortless run:  cd docker && docker compose up -d --build
+# Then open the management portal at http://localhost:9999
+services:
+  mcp:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mcp/server:latest
+    container_name: mcp
+    ports:
+      - "${SERVER_PORT:-9999}:9999"
+    environment:
+      # Portal admin (change the password from the portal after first login)
+      APP_ADMIN_USERNAME: ${APP_ADMIN_USERNAME:-admin}
+      APP_ADMIN_PASSWORD: ${APP_ADMIN_PASSWORD:-changeit}
+      # Optional: pin the PAT-encryption key (base64 32 bytes). If empty, one is generated
+      # under APP_DATA_DIR/secret.key.
+      APP_ENCRYPTION_KEY: ${APP_ENCRYPTION_KEY:-}
+      APP_DATA_DIR: /app/data
+      # Public URL used when MCP tools generate links back to this portal.
+      APP_PUBLIC_BASE_URL: ${APP_PUBLIC_BASE_URL:-http://localhost:9999}
+    # Data is stored inside the container by default. To persist it, prepare a
+    # host directory writable by uid/gid 1000 and mount it:
+    #
+    # volumes:
+    #   - ./mcp-data:/app/data
+    restart: unless-stopped
