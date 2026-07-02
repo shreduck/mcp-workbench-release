@@ -13,6 +13,7 @@ agent kit files into one private workspace that runs on your machine or on your 
 - Agent Kit files that can be edited, reverted, and downloaded
 - Docker files for a server install
 - A portable Windows launcher
+- A portable macOS launcher
 
 ## Run With Docker
 
@@ -61,6 +62,18 @@ The launcher starts MCP Workbench locally and keeps its data beside the launcher
 You can also download the server jar from the latest GitHub release and double-click it on Windows
 if Java is installed and associated with `.jar` files.
 
+## Run On macOS
+
+Download the macOS launcher zip from the latest GitHub release and extract it. If the archive
+contains `MCP Workbench.app`, run that app. The Java-only launcher folder can be started with:
+
+```text
+run-mcp-workbench.command
+```
+
+The launcher stores its default data under `~/Library/Application Support/MCP Workbench`. If you
+enable start at login, it creates a current-user LaunchAgent under `~/Library/LaunchAgents`.
+
 ## Connect Claude
 
 1. Open the portal.
@@ -93,5 +106,6 @@ Each release includes:
 - SHA-256 checksums
 - Docker files
 - the Windows launcher zip
+- the macOS launcher zip
 - this README
 - the license

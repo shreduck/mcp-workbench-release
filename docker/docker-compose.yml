@@ -19,6 +19,8 @@ services:
       APP_DATA_DIR: /app/data
       # Public URL used when MCP tools generate links back to this portal.
       APP_PUBLIC_BASE_URL: ${APP_PUBLIC_BASE_URL:-http://localhost:9999}
+      # Portal login session timeout. Spring duration syntax is supported, e.g. 12h, 1d.
+      APP_SESSION_TIMEOUT: ${APP_SESSION_TIMEOUT:-1d}
     # Data is stored inside the container by default. To persist it, prepare a
     # host directory writable by uid/gid 1000 and mount it:
     #
