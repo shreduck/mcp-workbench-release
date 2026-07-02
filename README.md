@@ -12,8 +12,8 @@ agent kit files into one private workspace that runs on your machine or on your 
 - Local Backlog, Kanban, and PR Analysis workspaces
 - Agent Kit files that can be edited, reverted, and downloaded
 - Docker files for a server install
-- A portable Windows launcher
-- A portable macOS launcher
+- Windows launcher zips with and without a bundled Java runtime
+- macOS launcher zips with and without a bundled Java runtime
 
 ## Run With Docker
 
@@ -51,25 +51,46 @@ docker run --rm \
 
 ## Run On Windows
 
-Download the Windows launcher zip from the latest GitHub release, extract it, and run:
+For the easiest install, download `mcp-workbench-windows-with-jre-<version>.zip` from the latest
+GitHub release, extract it, and run:
+
+```text
+MCP Workbench.exe
+```
+
+This zip includes the Java runtime needed by MCP Workbench.
+
+If you already have Java 22 or newer installed, you can instead download
+`mcp-workbench-windows-launcher-<version>.zip`, extract it, and run:
 
 ```text
 run-mcp-workbench.bat
 ```
 
-The launcher starts MCP Workbench locally and keeps its data beside the launcher folder.
+The Java-only launcher warns before startup when Java is missing or older than Java 22.
 
 You can also download the server jar from the latest GitHub release and double-click it on Windows
 if Java is installed and associated with `.jar` files.
 
 ## Run On macOS
 
-Download the macOS launcher zip from the latest GitHub release and extract it. If the archive
-contains `MCP Workbench.app`, run that app. The Java-only launcher folder can be started with:
+For the easiest install, download `mcp-workbench-mac-with-jre-<version>.zip` from the latest GitHub
+release, extract it, and run:
+
+```text
+MCP Workbench.app
+```
+
+This zip includes the Java runtime needed by MCP Workbench.
+
+If you already have Java 22 or newer installed, you can instead download
+`mcp-workbench-mac-launcher-<version>.zip`, extract it, and run:
 
 ```text
 run-mcp-workbench.command
 ```
+
+The Java-only launcher warns before startup when Java is missing or older than Java 22.
 
 The launcher stores its default data under `~/Library/Application Support/MCP Workbench`. If you
 enable start at login, it creates a current-user LaunchAgent under `~/Library/LaunchAgents`.
@@ -105,7 +126,9 @@ Each release includes:
 - the server jar
 - SHA-256 checksums
 - Docker files
-- the Windows launcher zip
-- the macOS launcher zip
+- the Windows launcher zip for installed Java 22+
+- the Windows with-JRE zip
+- the macOS launcher zip for installed Java 22+
+- the macOS with-JRE zip
 - this README
 - the license
