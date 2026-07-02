@@ -60,6 +60,16 @@ MCP Workbench.exe
 
 This zip includes the Java runtime needed by MCP Workbench.
 
+From this public release repository, you can also install or update the newest public Windows
+with-JRE zip without GitHub CLI:
+
+```bat
+scripts\install-windows-release.cmd
+```
+
+By default, it installs to `%USERPROFILE%\Apps\MCP Workbench` and preserves local `data\` and
+`mcp-workbench-launcher.properties` files.
+
 If you already have Java 22 or newer installed, you can instead download
 `mcp-workbench-windows-launcher-<version>.zip`, extract it, and run:
 
