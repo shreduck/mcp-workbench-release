@@ -4,6 +4,31 @@ MCP Workbench is a local server and desktop-friendly control panel for connectin
 work tools. It brings Azure DevOps, GitHub, backlog planning, Kanban boards, pull request review, and
 agent kit files into one private workspace that runs on your machine or on your own server.
 
+## License Summary
+
+MCP Workbench is released under the Research & Learning Commons
+Source-Available License.
+
+You may use it freely for personal learning, student work, teaching,
+nonprofit research, academic research, public-interest research,
+experimentation, benchmarking, and other noncommercial research or
+educational purposes.
+
+Companies, commercial users, client/customer work, paid consulting,
+enterprise workflows, production business use, hosted services, SaaS,
+managed services, commercial products, and commercial R&D require written
+permission after a single 30-day non-production trial.
+
+The 30-day trial is shared across an entire organization group, including
+parent companies, subsidiaries, child companies, sister/sibling
+companies, affiliates, related entities, merged entities, acquirers,
+successors, and reorganized entities. Reinstalling, forking, renaming,
+modifying, moving teams, changing projects, changing employees, changing
+entities, or using another version does not restart the trial.
+
+For commercial or enterprise permission, contact:
+duck_code_contact@proton.me
+
 ## What You Get
 
 - A browser portal at `http://localhost:9999`
