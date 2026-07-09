@@ -4,31 +4,6 @@ MCP Workbench is a local server and desktop-friendly control panel for connectin
 work tools. It brings Azure DevOps, GitHub, backlog planning, Kanban boards, pull request review, and
 agent kit files into one private workspace that runs on your machine or on your own server.
 
-## License Summary
-
-MCP Workbench is released under the Research & Learning Commons
-Source-Available License.
-
-You may use it freely for personal learning, student work, teaching,
-nonprofit research, academic research, public-interest research,
-experimentation, benchmarking, and other noncommercial research or
-educational purposes.
-
-Companies, commercial users, client/customer work, paid consulting,
-enterprise workflows, production business use, hosted services, SaaS,
-managed services, commercial products, and commercial R&D require written
-permission after a single 30-day non-production trial.
-
-The 30-day trial is shared across an entire organization group, including
-parent companies, subsidiaries, child companies, sister/sibling
-companies, affiliates, related entities, merged entities, acquirers,
-successors, and reorganized entities. Reinstalling, forking, renaming,
-modifying, moving teams, changing projects, changing employees, changing
-entities, or using another version does not restart the trial.
-
-For commercial or enterprise permission, contact:
-duck_code_contact@proton.me
-
 ## What You Get
 
 - A browser portal at `http://localhost:9999`
@@ -37,8 +12,8 @@ duck_code_contact@proton.me
 - Local Backlog, Kanban, and PR Analysis workspaces
 - Agent Kit files that can be edited, reverted, and downloaded
 - Docker files for a server install
-- Windows launcher zips with and without a bundled Java runtime
-- macOS launcher zips with and without a bundled Java runtime
+- A portable Windows launcher
+- A portable macOS launcher
 
 ## Run With Docker
 
@@ -76,56 +51,25 @@ docker run --rm \
 
 ## Run On Windows
 
-For the easiest install, download `mcp-workbench-windows-with-jre-<version>.zip` from the latest
-GitHub release, extract it, and run:
-
-```text
-MCP Workbench.exe
-```
-
-This zip includes the Java runtime needed by MCP Workbench.
-
-From this public release repository, you can also install or update the newest public Windows
-with-JRE zip without GitHub CLI:
-
-```bat
-scripts\install-windows-release.cmd
-```
-
-By default, it installs to `%USERPROFILE%\Apps\MCP Workbench` and preserves local `data\` and
-`mcp-workbench-launcher.properties` files.
-
-If you already have Java 22 or newer installed, you can instead download
-`mcp-workbench-windows-launcher-<version>.zip`, extract it, and run:
+Download the Windows launcher zip from the latest GitHub release, extract it, and run:
 
 ```text
 run-mcp-workbench.bat
 ```
 
-The Java-only launcher warns before startup when Java is missing or older than Java 22.
+The launcher starts MCP Workbench locally and keeps its data beside the launcher folder.
 
 You can also download the server jar from the latest GitHub release and double-click it on Windows
 if Java is installed and associated with `.jar` files.
 
 ## Run On macOS
 
-For the easiest install, download `mcp-workbench-mac-with-jre-<version>.zip` from the latest GitHub
-release, extract it, and run:
-
-```text
-MCP Workbench.app
-```
-
-This zip includes the Java runtime needed by MCP Workbench.
-
-If you already have Java 22 or newer installed, you can instead download
-`mcp-workbench-mac-launcher-<version>.zip`, extract it, and run:
+Download the macOS launcher zip from the latest GitHub release and extract it. If the archive
+contains `MCP Workbench.app`, run that app. The Java-only launcher folder can be started with:
 
 ```text
 run-mcp-workbench.command
 ```
-
-The Java-only launcher warns before startup when Java is missing or older than Java 22.
 
 The launcher stores its default data under `~/Library/Application Support/MCP Workbench`. If you
 enable start at login, it creates a current-user LaunchAgent under `~/Library/LaunchAgents`.
@@ -161,9 +105,7 @@ Each release includes:
 - the server jar
 - SHA-256 checksums
 - Docker files
-- the Windows launcher zip for installed Java 22+
-- the Windows with-JRE zip
-- the macOS launcher zip for installed Java 22+
-- the macOS with-JRE zip
+- the Windows launcher zip
+- the macOS launcher zip
 - this README
 - the license
