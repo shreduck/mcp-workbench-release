@@ -21,6 +21,9 @@ services:
       APP_PUBLIC_BASE_URL: ${APP_PUBLIC_BASE_URL:-http://localhost:9999}
       # Portal login session timeout. Spring duration syntax is supported, e.g. 12h, 1d.
       APP_SESSION_TIMEOUT: ${APP_SESSION_TIMEOUT:-1d}
+      # Neutral/corporate UI defaults. Set APP_NO_FUN_ALLOWED_FORCE=true to lock it.
+      APP_NO_FUN_ALLOWED: ${APP_NO_FUN_ALLOWED:-false}
+      APP_NO_FUN_ALLOWED_FORCE: ${APP_NO_FUN_ALLOWED_FORCE:-false}
     # Data is stored inside the container by default. To persist it, prepare a
     # host directory writable by uid/gid 1000 and mount it:
     #
