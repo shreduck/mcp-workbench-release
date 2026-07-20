@@ -30,6 +30,11 @@ Open:
 http://localhost:9999
 ```
 
+The default HTTP/WS endpoint favors easy local development. Before exposing Workbench to an
+untrusted or corporate network, use the home-screen hardening checklist to enable HTTPS/WSS,
+configure a trusted certificate or reverse proxy, restrict network access, and replace the bootstrap
+password.
+
 The first sign-in uses:
 
 ```text
@@ -152,3 +157,7 @@ Each release includes:
 - the macOS with-JRE zip
 - this README
 - the license
+
+Large runtime and desktop launcher binaries are published as GitHub Release assets rather than
+stored in this Git repository. This keeps ordinary clones small and avoids Git hosting object-size
+limits.

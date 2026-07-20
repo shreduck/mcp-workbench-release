@@ -24,6 +24,15 @@ services:
       # Neutral/corporate UI defaults. Set APP_NO_FUN_ALLOWED_FORCE=true to lock it.
       APP_NO_FUN_ALLOWED: ${APP_NO_FUN_ALLOWED:-false}
       APP_NO_FUN_ALLOWED_FORCE: ${APP_NO_FUN_ALLOWED_FORCE:-false}
+      # Leave blank to retain administrator control and the built-in developer defaults.
+      APP_TLS_ENABLED: ${APP_TLS_ENABLED:-}
+      APP_ALLOW_INSECURE_LOCALHOST: ${APP_ALLOW_INSECURE_LOCALHOST:-}
+      APP_ALLOW_INSECURE_ALL_HOSTS: ${APP_ALLOW_INSECURE_ALL_HOSTS:-}
+      APP_TLS_KEY_STORE: ${APP_TLS_KEY_STORE:-}
+      APP_TLS_KEY_STORE_PASSWORD: ${APP_TLS_KEY_STORE_PASSWORD:-}
+      APP_TLS_KEY_STORE_TYPE: ${APP_TLS_KEY_STORE_TYPE:-PKCS12}
+      APP_TLS_KEY_ALIAS: ${APP_TLS_KEY_ALIAS:-}
+      APP_TLS_KEY_PASSWORD: ${APP_TLS_KEY_PASSWORD:-}
     # Data is stored inside the container by default. To persist it, prepare a
     # host directory writable by uid/gid 1000 and mount it:
     #
