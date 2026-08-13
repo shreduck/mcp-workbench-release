@@ -255,9 +255,13 @@ each boundary:
 
 - passwords and integration tokens are encrypted at rest using the configured application key;
 - MCP keys are stored as hashes, shown once, independently scoped, auditable, and revocable;
-- state-changing backlog and review workflows are approval-first; proposal-tool
-  `pushOntoDevops=true` and `pushOntoGitHub=true` requests are rejected unless the MCP key owner
-  explicitly enables its **Immediate remote writes** permission;
+- state-changing backlog and review workflows are approval-first; proposal-tool immediate writes require
+  the MCP key's general **Immediate remote writes** permission, except that an Azure project configuration
+  may additionally authorize only Backlog work-item writes within its project and selected
+  ancestor subtrees for explicitly assigned MCP keys;
+- Azure project configurations can publish enabled custom-field expectations to agents, normalized with a list of affected
+  work-item types; field discovery runs only when requested in the portal, refreshes locked Azure metadata, and discovered
+  fields can be disabled or deleted;
 - audit entries record portal, MCP, macOS launcher, and Windows launcher identities;
 - the home-page hardening card summarizes warnings and expands to the remediation details;
 - application data can be reset by persistence unit or all at once by an administrator;
