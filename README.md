@@ -12,20 +12,15 @@ MCP key can be limited to the tools its agent actually needs.
 
 ## Why use it?
 
-- **One MCP endpoint, many workflows.** Connect an agent once, then use Kanban, PR analysis,
-  backlog proposals, code scanning, browser automation, Fetch Proxy, Think Trace, and more.
-- **Approval-first changes.** Prepare repository and work-item mutations locally, review them in the
-  portal, and push only the proposals you approve.
-- **Local-first persistence.** Boards, analyses, traces, policies, credentials, and audit records
-  remain in the configured application data directory.
-- **Scoped agent access.** Issue a separate MCP key per agent and restrict each key to an explicit
-  set of apps.
-- **Safe browser sessions.** Browsers start with fresh isolated profiles rather than your personal
-  browser profile, passwords, cookies, or extensions.
-- **Useful results at any size.** Fetch Proxy can retrieve an HTTP resource or delegate an MCP tool
-  call, retain the result temporarily, and return it in bounded parts.
-- **A portal for humans.** Inspect what agents created, understand code relationships, annotate live
-  browser sessions, and administer the service without editing configuration files.
+- **One governed toolset.** Give each agent one scoped MCP key for the workflows it needs.
+- **Approval-first changes.** Review proposed repository and work-item changes before they reach a
+  remote system.
+- **Release-aware repository research.** Find pull requests between tags or commits and retrieve Git
+  history with the pull requests associated to each commit.
+- **Local, inspectable work.** Boards, analyses, traces, policies, credentials, and audit records stay
+  in the configured application data directory.
+- **Isolated execution.** Browser tools use fresh profiles, while Fetch Proxy keeps large or delegated
+  results temporary and bounded.
 
 ## How it fits together
 
@@ -41,7 +36,7 @@ flowchart LR
     HELPER --> LOCAL_BROWSER["Isolated browser near the user"]
 ```
 
-Browser commands use the same API in both supported execution paths:
+Browser tools use the same operations in both supported execution paths:
 
 ```text
 AI → MCP Workbench → Browser
@@ -49,28 +44,56 @@ AI → MCP Workbench → proxy/helper → Browser
 ```
 
 The second path is useful when Workbench runs on another machine. The helper initiates an
-authenticated connection to Workbench and translates the existing browser API into local browser
-commands; it does not expose the user's normal browser profile.
+authenticated connection to Workbench and executes the browser tools near the user without exposing
+the user's normal browser profile.
+
+## MCP tool groups
+
+| Tools | How they work and what they are useful for |
+| --- | --- |
+| **Azure DevOps and GitHub** | Inspect repositories, branches, pull requests, comments, diffs, files, work items, and issues. `getAzurePullRequestSearchSupport` and `getGitHubPullRequestSearchSupport` describe provider filters; `searchAzurePullRequests` and `searchGitHubPullRequests` can bound a release by tags or commits, while `getAzureGitHistory` and `getGitHubGitHistory` return commits with associated pull requests. These tools are suited to release notes, change audits, and repository research. |
+| **Kanban** | Create and search persistent boards and cards, move work, add comments and links, and return portal links so an agent can hand a task back to a person. |
+| **PR Analysis** | Build local Azure DevOps or GitHub review records, organize findings and discussion, and publish only selected comments after review. |
+| **Backlog** | Record conversations and prepare versioned Azure DevOps or GitHub work-item, issue, test-plan, and pull-request proposals. Remote pushes remain explicit, scoped actions. |
+| **Agent Kits and Spec Docs** | Store reusable agent instructions and project documentation with folders, history, search, stable slugs, and portal links. |
+| **Think Trace** | Record typed reasoning nodes, edges, evidence, comments, and reports so an agent run can be searched, reviewed, and compared later. |
+| **Code Scanner** | Index local, Azure DevOps, or GitHub code; search symbols and files; follow calls and references; find entry points, service APIs, configuration, Data I/O, Maven structure, quality findings, and CVEs. |
+| **Browser Automation** | Start isolated direct or helper-backed browsers, navigate, inspect semantic snapshots, interact with elements, annotate pages, read console output, and capture screenshots. |
+| **Fetch Proxy** | Fetch policy-approved web content or delegate an allowed MCP tool, then poll, search, and read temporary results in bounded parts. |
+| **Tool catalogue** | `getMcpApiDocs` returns the currently exposed MCP tool descriptions and schemas for discovery without relying on a stale hard-coded list. |
 
 ## Product tour
 
 ### Plan work and review changes
 
-Kanban provides persistent boards, ordered columns, card assignment, due dates, search, and direct
-links agents can return to a user.
+Kanban tools keep planning work persistent and return direct links agents can hand back to a user.
 
 ![Kanban board populated with a release plan](docs/images/readme/kanban-board.png)
 
-PR Analysis turns an Azure DevOps or GitHub pull request into a review workspace. Findings are
-organized by severity, category, file, and line, with a controlled path for publishing selected
-comments.
+PR Analysis tools turn Azure DevOps or GitHub reviews into structured local findings with a
+controlled path for publishing selected comments.
 
 ![Pull request analysis with synthetic findings](docs/images/readme/pr-analysis.png)
 
+The release-aware repository tools first describe their supported filters, then search pull requests
+or walk commit history within an optional tag or commit range. Repository Query presents those MCP
+workflows for people, including commit-to-PR associations, linked Azure work item IDs, page grouping, pagination, and export.
+
+![Repository Query release-range search](docs/images/readme/repository-query.png)
+
+### Repeat browser and JVM measurements
+
+[Test Suite](docs/test-suite.md) groups reusable measurement profiles and saved runs in folders
+such as `App/sortB`. An agent can start `App#sortB`, interact through existing browser tools,
+then stop by run ID. Browser and JVM evidence share an explorable timeline, with repeated-run
+overlays and saved environment metadata. Stop leaves the application and browser open.
+
+![Test Suite combined browser and JVM timeline](docs/images/test-suite/runs-1920.png)
+
 ### Make agent reasoning inspectable
 
-Think Trace records a run as typed nodes and edges instead of hiding it in a chat transcript.
-Reports, comments, tools, evidence, decisions, and changes can be inspected together.
+Think Trace tools record a run as typed nodes and edges instead of hiding it in a chat transcript.
+Reports, comments, evidence, decisions, and changes remain inspectable together.
 
 ![Think Trace overview with graph and details](docs/images/readme/think-trace.png)
 
@@ -80,9 +103,9 @@ The expanded graph makes the full execution path easier to present or audit.
 
 ### Explore a codebase without pasting it into chat
 
-Code Scanner indexes local folders or authenticated Azure DevOps and GitHub branches. Java-aware
-scans add deterministic symbol, configuration, entry-point, reference, Data I/O, Maven dependency,
-and CVE analysis.
+Code Scanner tools index local folders or authenticated Azure DevOps and GitHub branches, then add
+deterministic Java symbol, configuration, entry-point, reference, Data I/O, Maven dependency, and CVE
+analysis.
 
 ![Code Scanner analysis overview](docs/images/readme/code-scanner.png)
 
@@ -98,47 +121,23 @@ view.
 
 ### Connect agents and controlled execution
 
-The Connect page provides a four-step tutorial with client-specific tabs for Claude Code, Codex,
-GitHub Copilot, and Grok, plus a searchable inventory of the tools enabled for the current key.
+The Connect page provides client-specific setup and a searchable inventory of the MCP tools enabled
+for the current key.
 
 ![Connect an agent tutorial](docs/images/readme/connect-an-agent.png)
 
-Browser Automation discovers installed Chromium, Chrome, Brave, and Firefox executables and creates
-reusable hardened configurations for direct or proxied sessions.
+Browser tools discover installed Chromium, Chrome, Brave, and Firefox executables and use reusable
+hardened configurations for direct or helper-backed sessions.
 
 ![Browser Automation configuration](docs/images/readme/browser-automation.png)
 
-Fetch Proxy applies global and per-key policy to outbound HTTP fetches and delegated tool results.
+Fetch Proxy tools apply global and per-key policy to outbound HTTP fetches and delegated tool results.
 
 ![Fetch Proxy policy and limits](docs/images/readme/fetch-proxy.png)
 
-## Apps
-
-### Workspace
-
-| App | What it provides |
-| --- | --- |
-| **Kanban** | Persistent boards, columns, cards, labels, assignment, due dates, search, movement, and portal links. |
-| **PR Analysis** | Local Azure DevOps and GitHub review cards, structured findings, file diffs, and selected-comment publishing. |
-| **Backlog** | Approval-first proposals for work-item and issue changes, test plans, and pull requests before remote mutation. |
-| **Agent Kits** | Reusable agent instructions and task-oriented kits that can be discovered through MCP. |
-| **Spec Docs** | Structured specifications and project documentation for human and agent collaboration. |
-| **Think Trace** | Typed execution graphs, evidence, decisions, comments, reports, comparisons, and shareable portal views. |
-| **Code Scanner** | Local or remote code indexes; Java symbols, hierarchy, entry points, configuration, Data I/O, Maven dependencies, and OSV CVEs. |
-
-### Integrations and administration
-
-| App | What it provides |
-| --- | --- |
-| **Azure DevOps** | Authenticated projects, repositories, pull requests, work items, trees, file content, and diffs. |
-| **GitHub** | Authenticated repositories, branches, pull requests, comments, issues, and approval-first write proposals. |
-| **Browsers** | Isolated Chromium, Chrome, Brave, or Firefox sessions with semantic snapshots, interaction, screenshots, and cooperative annotations. |
-| **Fetch Proxy** | Policy-controlled HTTP retrieval and delegated MCP calls with bounded, temporary result storage. |
-| **User Account** | Password management and the signed-in user's security controls. |
-| **Configuration** | Tabbed system, security, integration, database migration, and persistence settings. |
-| **MCP APIs** | Scoped MCP keys, allowed-tool selection, deny-by-default immediate remote-write permission, status, last use, regeneration, and revocation. |
-| **Connect** | Client-specific setup tutorial and available-tool discovery. |
-| **Logs** | Searchable operational and audit logs, including launcher identities. |
+The portal supplies human views for these tool groups plus credentials, per-key permissions, browser
+and Fetch Proxy policy, persistence, connectivity, and audit logs. It is an operator interface; agent
+automation uses the scoped MCP tools described above.
 
 ## Install
 
@@ -255,10 +254,11 @@ each boundary:
 
 - passwords and integration tokens are encrypted at rest using the configured application key;
 - MCP keys are stored as hashes, shown once, independently scoped, auditable, and revocable;
-- state-changing backlog and review workflows are approval-first; proposal-tool immediate writes require
-  the MCP key's general **Immediate remote writes** permission, except that an Azure project configuration
-  may additionally authorize only Backlog work-item writes within its project and selected
-  ancestor subtrees for explicitly assigned MCP keys;
+- state-changing backlog and review workflows are approval-first; an MCP key's broad **Immediate remote
+  writes** permission authorizes proposal pushes plus unscoped pull-request writes (comments and creation/update);
+- Azure project configurations can separately grant assigned MCP keys work-item force pushes within selected
+  ancestor subtrees, or Azure pull-request writes for exact target branches (or every branch in that project);
+  GitHub pull-request writes always require the broad **Immediate remote writes** permission;
 - Azure project configurations can publish enabled custom-field expectations to agents, normalized with a list of affected
   work-item types; field discovery runs only when requested in the portal, refreshes locked Azure metadata, and discovered
   fields can be disabled or deleted;
@@ -382,8 +382,10 @@ mcp-application         Spring Boot assembly
 mcp-windows / mcp-mac   desktop launchers
 ```
 
-Operational and publishing details live under [`docs/`](docs/). Browser implementers should start
-with the protocol document linked above.
+Operational and publishing details live under [`docs/`](docs/). Humans can use **Repository Query**
+in the portal; release automation clients should connect to `/mcp` and follow the
+[release-aware pull request and Git history tool guide](docs/git-release-query-api.md). Browser
+implementers should start with the protocol document linked above.
 
 ## License
 
