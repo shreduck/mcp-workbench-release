@@ -16,6 +16,17 @@ RUN addgroup -S app && adduser -S app -G app
 
 WORKDIR /app
 COPY --from=build /src/mcp-application/target/mcp-server.jar /app/app.jar
+COPY --from=build /src/mcp-application/target/container-security/container-security.jar /opt/workbench-security/container-security.jar
+COPY mcp-application/src/main/jib/opt/workbench-security/entrypoint.sh /opt/workbench-security/entrypoint.sh
+
+# Prune image trust stores too. Startup repeats the policy for mounted/custom
+# stores and Jib images; the TLS agent rejects blocked intermediate CA chains.
+RUN mkdir /tmp/image-trust && \
+    java -cp /opt/workbench-security/container-security.jar com.duck.mcp.container.ContainerTrustStores \
+        /tmp/image-trust /etc/ssl/certs/ca-certificates.crt && \
+    cp /tmp/image-trust/cacerts "$JAVA_HOME/lib/security/cacerts" && \
+    cp /tmp/image-trust/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt && \
+    rm -rf /tmp/image-trust
 
 # H2 file + generated encryption key live here by default.
 ENV APP_DATA_DIR=/app/data
@@ -28,4 +39,4 @@ EXPOSE 9999
 HEALTHCHECK --interval=30s --timeout=5s --start-period=45s --retries=3 \
 	CMD wget -qO- http://localhost:9999/actuator/health | grep -q '"status":"UP"' || exit 1
 
-ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "/app/app.jar"]
+ENTRYPOINT ["sh", "/opt/workbench-security/entrypoint.sh", "jar"]

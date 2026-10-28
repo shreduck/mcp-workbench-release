@@ -54,9 +54,10 @@ the user's normal browser profile.
 | **Azure DevOps and GitHub** | Inspect repositories, branches, pull requests, comments, diffs, files, work items, and issues. `getAzurePullRequestSearchSupport` and `getGitHubPullRequestSearchSupport` describe provider filters; `searchAzurePullRequests` and `searchGitHubPullRequests` can bound a release by tags or commits, while `getAzureGitHistory` and `getGitHubGitHistory` return commits with associated pull requests. These tools are suited to release notes, change audits, and repository research. |
 | **Kanban** | Create and search persistent boards and cards, move work, add comments and links, and return portal links so an agent can hand a task back to a person. |
 | **PR Analysis** | Build local Azure DevOps or GitHub review records, organize findings and discussion, and publish only selected comments after review. |
-| **Backlog** | Record conversations and prepare versioned Azure DevOps or GitHub work-item, issue, test-plan, and pull-request proposals. Remote pushes remain explicit, scoped actions. |
+| **Backlog** | Record conversations and prepare versioned Azure DevOps or GitHub work-item, issue, test-plan, and pull-request proposals. Remote pushes remain explicit, scoped actions. Work-item proposals support nested trees, previewed ancestor publishing with automatic Azure parent IDs, and optional file attachments (2 MB each). Bug main text publishes as Repro Steps. The Graph desktop connects all conversations and proposals on a pannable canvas with searchable focus and movable, resizable detail windows. |
 | **Agent Kits and Spec Docs** | Store reusable agent instructions and project documentation with folders, history, search, stable slugs, and portal links. |
 | **Think Trace** | Record typed reasoning nodes, edges, evidence, comments, and reports so an agent run can be searched, reviewed, and compared later. |
+| **[Canvas Workstation](mcp-canvas-workstation/README.md)** | Assemble private or shared graphs across Workbench items, remote Azure/GitHub records, custom notes, and URLs. Expand relationships with live progress, combine saved canvases, filter or explore by level of detail, and export standalone SVG. Canvas and source permissions are checked separately. |
 | **Code Scanner** | Index local, Azure DevOps, or GitHub code; search symbols and files; follow calls and references; find entry points, service APIs, configuration, Data I/O, Maven structure, quality findings, and CVEs. |
 | **Browser Automation** | Start isolated direct or helper-backed browsers, navigate, inspect semantic snapshots, interact with elements, annotate pages, read console output, and capture screenshots. |
 | **Fetch Proxy** | Fetch policy-approved web content or delegate an allowed MCP tool, then poll, search, and read temporary results in bounded parts. |
@@ -120,6 +121,15 @@ view.
 ![Code Scanner entry-point browser](docs/images/readme/code-scanner-entrypoints.png)
 
 ### Connect agents and controlled execution
+
+[Agents](docs/agents.md) opens read-only conversations with installed Codex and Claude CLIs.
+Manage their shared settings in **Configuration → Agent CLIs**, including named WSL profiles
+with a distribution and starting folder. Jobs uses the same saved configurations; opening
+the workspace sends no prompt.
+
+[Jobs MCP tools](docs/jobs-mcp.md) discover action schemas and named AI configurations, author
+versioned workflows, manage schedules and manual runs, and inspect logs, reports and audit.
+Jobs Read, Edit and Execute are separate MCP key permissions, each off by default.
 
 The Connect page provides client-specific setup and a searchable inventory of the MCP tools enabled
 for the current key.
@@ -204,6 +214,11 @@ cp .env.example .env
 docker compose up -d --build
 ```
 
+Both Alpine image build paths (Dockerfile/Compose and Maven Jib) enforce the
+[container CA trust policy](docker/CERTIFICATE-POLICY.md). It blocks eMudhra/emSign,
+the affected AAA cross-signing anchor, and recognized India-based CA operators and
+chains. Rebuild/recreate existing containers to apply it.
+
 ### Executable jar or source
 
 The release repository also provides `mcp-workbench-<version>.jar`, which requires Java 22 or newer:
@@ -227,6 +242,13 @@ mvn -pl :mcp-application -am spring-boot:run
 
 Open `http://localhost:9999`. The initial local administrator is `admin` with password `changeit`;
 change it immediately before exposing the service beyond a trusted development machine.
+
+### Install the webpage as an app
+
+Workbench also supports browser installation as a PWA. Keep the Workbench server running,
+then use **Install app** when offered or your browser's install menu. If the server becomes
+unreachable, an existing error duck page offers Retry; application data and actions are
+not available offline. See [PWA setup, behavior and verification](docs/pwa.md).
 
 ## Connect an AI client
 
